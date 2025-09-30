@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>NDIIDEP Payment</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="container">
+    <h1>NDIIDEP — Pembayaran</h1>
+
+    <section class="payments">
+      <h2>Pilih metode pembayaran</h2>
+      <div class="methods">
+        <button class="pay-btn" data-method="dana">DANA</button>
+        <button class="pay-btn" data-method="gopay">GoPay</button>
+        <button class="pay-btn" data-method="ovo">OVO</button>
+        <button class="pay-btn" data-method="shopeepay">ShopeePay</button>
+      </div>
+
+      <div id="qris-list">
+        <h3>QRIS</h3>
+        <div class="qris-item" data-type="dana">QRIS DANA: <span class="qris-status">Mengecek...</span></div>
+        <div class="qris-item" data-type="gopay">QRIS GOPAY: <span class="qris-status">Mengecek...</span></div>
+        <div class="qris-item" data-type="orkut">QRIS ORKUT: <span class="qris-status">Mengecek...</span></div>
+      </div>
+
+      <form id="upload-form">
+        <h3>Upload bukti transfer</h3>
+        <input type="file" id="proof" accept="image/*" required />
+        <input type="text" id="nama" placeholder="Nama pemilik rekening / username" required />
+        <input type="text" id="nominal" placeholder="Nominal (opsional)" />
+        <button type="submit">Kirim bukti</button>
+      </form>
+
+      <div id="result"></div>
+    </section>
+  </main>
+  <script src="frontend.js"></script>
+</body>
+</html>
