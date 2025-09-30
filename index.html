@@ -1,42 +1,242 @@
 <!doctype html>
+
 <html lang="id">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>NDIIDEP Payment</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: #0a0f1f;
+      color: #e6eef8;
+      overflow-x: hidden;
+    }canvas#particles {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: -1;
+  background: linear-gradient(180deg, #050818, #0a0f1f 70%, #0e1730);
+}
+
+.container {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  animation: fadeIn 1s ease;
+}
+
+h1 {
+  font-size: 34px;
+  font-weight: 800;
+  text-align: center;
+  background: linear-gradient(90deg, #4f46e5, #7c3aed, #06b6d4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 25px;
+  letter-spacing: 1px;
+  animation: glow 2s infinite alternate;
+}
+
+.payments {
+  background: rgba(255, 255, 255, 0.04);
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  backdrop-filter: blur(10px);
+  transform: translateY(20px);
+  animation: slideUp 1s ease forwards;
+}
+
+h2, h3 {
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.methods {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.pay-btn {
+  background: linear-gradient(135deg, #1e293b, #334155);
+  border: none;
+  padding: 12px 18px;
+  border-radius: 12px;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .3s;
+}
+
+.pay-btn:hover {
+  transform: translateY(-4px) scale(1.05);
+  background: linear-gradient(135deg, #6366f1, #7c3aed);
+  box-shadow: 0 6px 20px rgba(99,102,241,0.6);
+}
+
+#qris-list {
+  margin: 18px 0;
+}
+
+.qris-item {
+  padding: 12px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  margin-bottom: 8px;
+  transition: transform .3s;
+}
+
+.qris-item:hover {
+  transform: scale(1.03);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+#upload-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+#upload-form input, #upload-form button {
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  font-size: 14px;
+}
+
+#upload-form input {
+  background: rgba(255, 255, 255, 0.07);
+  color: #e6eef8;
+}
+
+#upload-form button {
+  background: linear-gradient(135deg, #06b6d4, #4f46e5);
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all .3s;
+}
+
+#upload-form button:hover {
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(124,58,237,0.6);
+}
+
+#result {
+  margin-top: 15px;
+  white-space: pre-wrap;
+  background: rgba(0,0,0,0.3);
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 13px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 10px #4f46e5; }
+  to { text-shadow: 0 0 20px #06b6d4; }
+}
+
+  </style>
 </head>
 <body>
+  <canvas id="particles"></canvas>
   <main class="container">
-    <h1>NDIIDEP — Pembayaran</h1>
+    <h1>NDIIDEP — Pembayaran</h1><section class="payments">
+  <h2>Pilih metode pembayaran</h2>
+  <div class="methods">
+    <button class="pay-btn" data-method="dana">DANA</button>
+    <button class="pay-btn" data-method="gopay">GoPay</button>
+    <button class="pay-btn" data-method="ovo">OVO</button>
+    <button class="pay-btn" data-method="shopeepay">ShopeePay</button>
+  </div>
 
-    <section class="payments">
-      <h2>Pilih metode pembayaran</h2>
-      <div class="methods">
-        <button class="pay-btn" data-method="dana">DANA</button>
-        <button class="pay-btn" data-method="gopay">GoPay</button>
-        <button class="pay-btn" data-method="ovo">OVO</button>
-        <button class="pay-btn" data-method="shopeepay">ShopeePay</button>
-      </div>
+  <div id="qris-list">
+    <h3>QRIS</h3>
+    <div class="qris-item" data-type="dana">QRIS DANA: <span class="qris-status">Mengecek...</span></div>
+    <div class="qris-item" data-type="gopay">QRIS GOPAY: <span class="qris-status">Mengecek...</span></div>
+    <div class="qris-item" data-type="orkut">QRIS ORKUT: <span class="qris-status">Mengecek...</span></div>
+  </div>
 
-      <div id="qris-list">
-        <h3>QRIS</h3>
-        <div class="qris-item" data-type="dana">QRIS DANA: <span class="qris-status">Mengecek...</span></div>
-        <div class="qris-item" data-type="gopay">QRIS GOPAY: <span class="qris-status">Mengecek...</span></div>
-        <div class="qris-item" data-type="orkut">QRIS ORKUT: <span class="qris-status">Mengecek...</span></div>
-      </div>
+  <form id="upload-form">
+    <h3>Upload bukti transfer</h3>
+    <input type="file" id="proof" accept="image/*" required />
+    <input type="text" id="nama" placeholder="Nama pemilik rekening / username" required />
+    <input type="text" id="nominal" placeholder="Nominal (opsional)" />
+    <button type="submit">Kirim bukti</button>
+  </form>
 
-      <form id="upload-form">
-        <h3>Upload bukti transfer</h3>
-        <input type="file" id="proof" accept="image/*" required />
-        <input type="text" id="nama" placeholder="Nama pemilik rekening / username" required />
-        <input type="text" id="nominal" placeholder="Nominal (opsional)" />
-        <button type="submit">Kirim bukti</button>
-      </form>
+  <div id="result"></div>
+</section>
 
-      <div id="result"></div>
-    </section>
   </main>
+  <script>
+    // Particles simple background
+    const canvas = document.getElementById('particles')
+    const ctx = canvas.getContext('2d')
+    let particlesArray = []
+    canvas.width = window.innerWidth
+    canvas.height = window.innerHeightclass Particle{
+  constructor(){
+    this.x = Math.random() * canvas.width
+    this.y = Math.random() * canvas.height
+    this.size = Math.random() * 2 + 1
+    this.speedX = Math.random() * 1 - 0.5
+    this.speedY = Math.random() * 1 - 0.5
+  }
+  update(){
+    this.x += this.speedX
+    this.y += this.speedY
+    if(this.x < 0 || this.x > canvas.width) this.speedX *= -1
+    if(this.y < 0 || this.y > canvas.height) this.speedY *= -1
+  }
+  draw(){
+    ctx.beginPath()
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
+    ctx.fillStyle = 'rgba(124,58,237,0.7)'
+    ctx.fill()
+  }
+}
+
+function init(){
+  particlesArray = []
+  for(let i=0; i<100; i++){
+    particlesArray.push(new Particle())
+  }
+}
+
+function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height)
+  particlesArray.forEach(p=>{p.update();p.draw()})
+  requestAnimationFrame(animate)
+}
+
+init()
+animate()
+window.addEventListener('resize',()=>{
+  canvas.width = window.innerWidth
+  canvas.height = window.innerHeight
+  init()
+})
+
+  </script>
   <script src="frontend.js"></script>
 </body>
 </html>
