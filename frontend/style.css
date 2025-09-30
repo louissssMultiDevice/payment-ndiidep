@@ -1,0 +1,12 @@
+:root{--bg:#0f172a;--card:#0b1220;--accent:#7c3aed;color-scheme:dark}
+body{font-family:Inter,system-ui,Arial;background:linear-gradient(180deg,#07102a,#0b1220);color:#e6eef8;margin:0;padding:30px}
+.container{max-width:860px;margin:0 auto}
+h1{font-size:28px;margin-bottom:12px}
+.payments{background:rgba(255,255,255,0.03);padding:20px;border-radius:12px;box-shadow:0 6px 18px rgba(2,6,23,0.6)}
+.methods{display:flex;gap:8px;margin-bottom:12px}
+.pay-btn{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:10px 14px;border-radius:8px;color:inherit;cursor:pointer}
+.pay-btn:hover{transform:translateY(-2px)}
+#qris-list{margin:12px 0}
+.qris-item{padding:8px;border-radius:8px;background:rgba(255,255,255,0.02);margin-bottom:6px}
+#upload-form{display:flex;flex-direction:column;gap:8px}
+#result{margin-top:12px}
